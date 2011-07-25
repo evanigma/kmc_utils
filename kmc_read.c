@@ -46,7 +46,8 @@
  *		 kmc_read -H -f 66 /dev/sga  | display
  *
  *
- * Dan Mueth - 08/23/99.  Version 0.3.2
+ * Dan Mueth - 08/23/99.  
+ * Patched by Evan Fox - 07/24/11. Version 0.3.3
  *
  * Change Log:
  *
@@ -113,7 +114,7 @@ char nframesset = 0;
 char save_frames = 0;
 long start_frame, end_frame, n_frames;
 long framenumber;
-unsigned char specifiedformat[4];
+unsigned char specifiedformat[5];
 
 
 /* other global variables */
@@ -125,8 +126,8 @@ char *device_name;
 long grabframenums[10000];		/* list of frames to transfer */
 long saveframenums[10000];		/* number to give to frams as saving */
 
-unsigned char 		image[245760];   /* The image data, in order: 512x480*/
-unsigned char 		imageformat[4];
+unsigned char 		image[245761];   /* The image data, in order: 512x480*/
+unsigned char 		imageformat[5];
 
 
 /* obsolete */
@@ -436,8 +437,8 @@ int read_multiple_frames()
 {
     long 	i;
     unsigned char filename[200];
-    unsigned char numberstring1[10];
-    unsigned char numberstring2[10];
+    unsigned char numberstring1[11];
+    unsigned char numberstring2[11];
 
     /* Check the parameters related to multiple grabbing and set some
      * variables which will be used below.				*/

@@ -7,7 +7,7 @@ RPM_VERSION = 1
 
 # **************** You may want to change these paths ****************
 MANDIR = /usr/local/man
-BINDIR = /usr/local/bin
+BINDIR = /usr/bin
 DOCDIR = /usr/doc
 
 # *********** You should not need to edit below this line ************
@@ -19,7 +19,7 @@ TARSTUFF = BUGS CHANGELOG LICENSE README TODO Makefile \
 		man8 xpm
 
 CC = gcc
-CFLAGS = -O2 $(EXTRA)
+CFLAGS = -g -O2 $(EXTRA)
 LDIRS = -L/usr/X11R6/lib -L.
 GTK_CFLAGS = -I/usr/X11R6/include -I/usr/lib/glib/include -pg
 GTK_LIBS = -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm -lkmc

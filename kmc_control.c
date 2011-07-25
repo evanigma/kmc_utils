@@ -636,6 +636,7 @@ int main(int argc, char **argv)
 			break;
 
 		default:
+			break;
 			//printf("?? getopt returned character code 0%o ??\n",c);
 		}
 	}

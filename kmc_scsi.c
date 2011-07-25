@@ -68,11 +68,11 @@ char *devices[] =
 /* Device information variables */
 int idcode, dataversion, hsize, vsize, nframes, fps, speed, color, trigger, year, month, date, time_hour, time_minute, time_second, sessionid, balance, cp1, cp2, cp3, cp4, cp5, cp6, cp7, cp8, cp9;
 /* Note these must not be unsigned char's */ 
-char vendor[8];
-char product[16];
-char version[4];
-char vendorinherent[20];
-char reserved[40];
+char vendor[9];
+char product[17];
+char version[5];
+char vendorinherent[21];
+char reserved[41];
 
 int dev_fd;                                  /* SCSI device/file descriptor */
 static unsigned char cmd[SCSI_OFF + 18];     /* SCSI command buffer */
@@ -264,14 +264,14 @@ int get_device_info(void)
     tmp = pagestart[16];
     pagestart[16] = 0;
     sprintf(vendor,"%s",pagestart+8);
-//    printf("...............vendor: %s\n",vendor);
+    //printf("vendor: %s",vendor);
     pagestart[16] = tmp;
     
 
     tmp = pagestart[32];
     pagestart[32] = 0;
     sprintf(product,"%s",pagestart+16);
-//    printf("...............product: %s\n",product);
+    //printf("...............product: %s\n",product);
     pagestart[32] = tmp;
 
     tmp = pagestart[36];
