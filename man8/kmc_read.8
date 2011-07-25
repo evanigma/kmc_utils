@@ -1,0 +1,194 @@
+.TH KMC_READ 8 "Sept 01, 1999" "kmc_utils" "Version 0.3.2" 
+.SH NAME
+kmc_read \- read settings and images from Kodak Motion Corder high speed digital cameras
+.SH SYNOPSIS
+.B "kmc_read" [ \fIoptions\fP...  ] [ \fIdevice\fP ]
+.SH DESCRIPTION
+kmc_read is part of the kmc_utils package for controlling and reading 
+information and images from Kodak Motion Corder(KMC) high speed 
+digital cameras.
+This version is designed to run on Linux, although future versions may 
+support other Unix variants.  
+.PP
+kmc_read is the command line interface to retrieving information from 
+KMCs through the SCSI interface.  This includes retrieving information
+about the camera and its current settings, as well as retrieving images 
+stored in a KMC's memory.  It does not allow remote control of a KMC,
+which is done through a serial interface using kmc_control.
+
+.SH OPTIONS
+.TP
+.I \-h 
+Show usage (help) information
+.TP
+.I \-v 
+Show version number
+.TP
+.I \-l 
+List generic SCSI devices on system
+.TP
+.I \-L 
+List vendor and product of generic SCSI devices on system
+.TP
+.I \-k 
+List generic SCSI devices which are Kodak Motion Corders 
+.TP
+.I \-q 
+Short query of device information for \fIdevice\fP
+.TP
+.I \-Q 
+Long query of device information for \fIdevice\fP
+.TP
+.I \-f \fIframe\fP 
+Read frame \fIframe\fP from \fIdevice\fP 
+.TP
+.I \-s \fIstartframe\fP 
+Read multiple frames, starting at frame \fIstartframe\fP from \fIdevice\fP 
+.TP
+.I \-e \fIendframe\fP 
+Read multiple frames, ending at frame \fIendframe\fP from \fIdevice\fP 
+.TP
+.I \-n \fInframes\fP 
+Read a total of \fInframes\fP from \fIdevice\fP
+.TP
+.I \-r 
+Renumber frames when saving such that 0 is first saved frame
+.TP
+.I \-c 
+Reorder frames before saving in chronological order
+.TP
+.I \-T 
+True CCD coloring (no interpolation)
+.TP
+.I \-t 
+Save/output images in tiff format (Not yet supported) 
+
+(Default is pgm for monochrome camera, ppm for color)
+.TP
+.I \-p 
+Save/output images in ppm format 
+
+(Default is pgm for monochrome camera, ppm for color)
+.TP
+.I \-g 
+Save/output images in pgm format 
+
+(Default is pgm for monochrome camera, ppm for color)
+.TP
+.I \-i \fIfilename\fP 
+Write long query of \fIdevice\fP to \fIfilename\fP
+.TP
+.I \-o \fIfilename\fP 
+Save image(images) to \fIfilename\fP(\fIfilename####\fP)
+
+(Default is to send images to STDOUT.)
+
+.SH EXAMPLES 
+To list all generic SCSI devices on the system with vendor and 
+product information, use:
+
+.nf
+	kmc_read -L
+.fi
+
+This command is typically necessary to determine which generic SCSI device 
+has been assigned to the KMC.
+.PP
+To show settings of a KMC (frame size, frame rate, shutter speed,
+total number of frames in memory, trigger mode, etc.), use:
+
+.nf
+	kmc_read -Q /dev/sga 
+.fi
+
+The generic scsi device, "/dev/sga" here, must match that returned by 
+"kmc_read -L" above.
+
+To read frame 25 from a monochrome KMC attached to device /dev/sga
+and write the image in pgm format to a file called "image.pgm", use:
+
+.nf
+	kmc_read -f 25 -o image.pgm /dev/sga
+.fi
+
+To read frame 25 from a KMC attached to device /dev/sga and display the
+image using the display utility (requires ImageMagick), use:
+
+.nf
+	kmc_read -f 25 /dev/sga | display
+.fi
+
+To read frames 100 through 1570 from a KMC attached to device /dev/sga
+and save them to files named "image0100.pgm", ..., "image1570.pgm", use:
+
+.nf
+	kmc_read -s 100 -e 1570 -o image /dev/sga 
+.fi
+
+.SH CAMERA FRAME NUMBERING
+The default frame numbering is "Camera Frame Numbering".  Frame numbering
+is dependent upon whether the camera trigger is set to "Start", "Center", 
+or "Stop".  In all cases, the trigger frame is frame "0".   
+.SS Start Triggering
+Start triggering indicates that the camera begins acquiring 
+frames when the trigger is given and continues acquiring until the
+memory is full.  The first frame (the trigger frame) is numbered 0, 
+the second frame is 1, ..., the last frame is (N-1).
+
+.nf
+------------------------------------------------------------
+| \fI0\fP | 1 |                  ...                     | (N-1) |
+------------------------------------------------------------
+.fi
+
+.SS Center Triggering
+The trigger frame is the middle-most frame in "Center Triggering".
+The next frame is "1", ..., the last frame stored is (N/2)-1.  
+Frame (N/2) is chronologically the first frame acquired, and frame 
+(N-1) is the frame immediately preceeding the trigger frame.
+.nf
+------------------------------------------------------------
+| (N/2) |    ...    | (N-1) | \fI0\fP | 1 |     ...    | (N/2)-1 |
+------------------------------------------------------------
+.fi
+
+.SS End Triggering
+In "End Trigger" mode, the chronological first frame is "1", the next
+frame is "2", ..., the second to last frame is (N-1), and the last
+frame is the trigger frame, indexed "0".
+.nf
+------------------------------------------------------------
+| 1 | 2 |                  ...                 | (N-1) | \fI0\fP |
+------------------------------------------------------------
+.fi
+
+.SH CHRONOLOGICAL FRAME NUMBERING
+In certain circumstances, the precise frame at which the camera was 
+triggered is not important.  In these circumstances, it may be more 
+convenient to use "Chronological Frame Numbering".  Frames are specified 
+in chronological order, "0" being the frame number of the first frame acquired
+and (N-1) being the number of the last frame acquired, independent of the 
+trigger mode of the camera.  When the frames are saved to files, the 
+file names will
+be indexed by the chronological frame number, unless the renumber flag \fI-r\fP
+is used in which case the first frame saved is indexed as "0", the 
+second as "1", etc.
+
+
+
+.SH NOTE
+A KMC must be in "Live" mode to properly transfer images on the SCSI 
+bus.  Transfers done in "Playback" mode tend to be unreliable.     
+ 
+.SH NOTE ABOUT COLOR KMC's
+Color KMC's have 512x480 CCD elements, the same as with monochrome KMC's.
+Each element has a single color(red, green, or blue).  The default format
+for color images is an XxY ppm(eg. 512x480). The default mode for transfering
+color images is to interpolate the missing pixels for each color space.  
+(Note that currently the interpolation routine used is different from that
+used by Kodak in their Windows software.)  Interpolation can be turn off with
+the \fI-T\fP flag. 
+
+ 
+.SH AUTHOR
+Dan Mueth -\ d-mueth@uchicago.edu

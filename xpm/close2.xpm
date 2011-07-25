@@ -1,0 +1,27 @@
+/* XPM */
+static char *close2[] = {
+/* width height num_colors chars_per_pixel */
+"    15    16        4            1",
+/* colors */
+". c #000000",
+"# c #a4a4a4",
+"a c #eaeaea",
+"b c #ffffff",
+/* pixels */
+"aaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaa",
+"aaa.aaaa..aaaaa",
+"aaa..aa....aaaa",
+"aaaa..a...aaaaa",
+"aaaa.....aaaaaa",
+"aaaaa...aaaaaaa",
+"aaaaa....aaaaaa",
+"aaaa......aaaaa",
+"aaaa..a....aaaa",
+"aaa..aaa....aaa",
+"aaa.aaaaa..aaaa",
+"aaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaa"
+};

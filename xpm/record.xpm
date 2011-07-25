@@ -1,0 +1,22 @@
+/* XPM */
+static char * record_xpm[] = {
+"13 15 4 1",
+" 	c #949495959494",
+".	c #8E8E8E8E8E8E",
+"X	c #000000000000",
+"o	c #FFFFFFFFFFFF",
+"             ",
+" ............",
+" ..XXXXXX....",
+" .XXXXXXXX...",
+"..XXXXXXXXX..",
+".XXXXXXXXXXX.",
+".XXXXXXXXXXX.",
+".XXXXXXXXXXX.",
+" XXXXXXXXXXX.",
+" XXXXXXXXXXX.",
+" .XXXXXXXXX..",
+" ..XXXXXXX..o",
+" ...XXXXX..o.",
+" .........o..",
+" ....ooooo..."};

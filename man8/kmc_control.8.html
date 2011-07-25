@@ -1,0 +1,264 @@
+<HTML><HEAD><TITLE>Manpage of KMC_READ</TITLE>
+</HEAD><BODY>
+<H1>KMC_READ</H1>
+Section: Version 0.3.1 (8)<BR>Updated: Aug 23, 1999<BR><A HREF="#index">Index</A>
+<A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+kmc_control - control a Kodak Motion Corder using serial interface
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>kmc_control [ </B><I>-d DEVICE </I> ] [ <I>options</I>...  ]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+kmc_control is part of the kmc_utils package for controlling and reading 
+information and images from Kodak Motion Corder(KMC) high speed 
+digital cameras.
+This version is designed to run on Linux, although future versions may 
+support other Unix variants.  
+<P>
+
+kmc_control is the command line interface for sending commands and receiving
+information over the RS-232C (serial) interface. It does not allow one to
+transfer images from the KMC to a computer, which is done with kmc_read. 
+<P>
+
+kmc_control gives the user low level access such as pressing individual 
+buttons, or the user can use higher level commands to change variables, 
+change modes, play, record, etc. with a single command from any mode of 
+the KMC.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><I>-H </I>
+
+<DD>
+Show usage (help) information
+<DT><I>-v </I>
+
+<DD>
+Show version number
+<DT><I>-I </I>
+
+<DD>
+Begin interactive mode
+<DT><I>-Q </I>
+
+<DD>
+Full query
+<DT><I>-p </I>
+
+<DD>
+Play
+<DT><I>-s </I>
+
+<DD>
+Stop
+<DT><I>-r </I>
+
+<DD>
+Record
+<DT><I>-c </I>
+
+<DD>
+Clear serial buffer
+<DT><I>--pp, --pplay</I>
+
+<DD>
+Press Play button
+<DT><I>--ps, --pstop, --pescape </I>
+
+<DD>
+Press Stop/Escape button
+<DT><I>--pu, --pup </I>
+
+<DD>
+Press Up button
+<DT><I>--pd, --pdown </I>
+
+<DD>
+Press Down button
+<DT><I>--pm, --pmode </I>
+
+<DD>
+Press Mode button
+<DT><I>--pe, --penter, --pmenu </I>
+
+<DD>
+Press Enter/Menu button
+<DT><I>--pr, --precordready</I>
+
+<DD>
+Press Record Ready button
+<DT><I>--pt, --ptrigger</I>
+
+<DD>
+Press Trigger button
+<DT><I>--qdate</I>
+
+<DD>
+Query date
+<DT><I>--qmode</I>
+
+<DD>
+Query mode
+<DT><I>--qdisplaymode</I>
+
+<DD>
+Query if in Display Mode
+<DT><I>--qrecordready</I>
+
+<DD>
+Query if Record Ready
+<DT><I>--qsetup</I>
+
+<DD>
+Query if in Setup Mode
+<DT><I>--qdisplaystatus</I>
+
+<DD>
+Query Display Status
+<DT><I>--qtrigger</I>
+
+<DD>
+Query Trigger Mode
+<DT><I>--qrandom</I>
+
+<DD>
+Query Random Trigger Mode
+<DT><I>--qmemory</I>
+
+<DD>
+Query number of memory boards
+<DT><I>--qrecordrate</I>
+
+<DD>
+Query record rate
+<DT><I>--qsize</I>
+
+<DD>
+Query display size
+<DT><I>--qshutter</I>
+
+<DD>
+Query shutter speed
+<DT><I>--qplayrate</I>
+
+<DD>
+Query playback rate
+<DT><I>--qcount</I>
+
+<DD>
+Query frame count
+<DT><I>--qtime</I>
+
+<DD>
+Query time 
+<DT><I>--qedge</I>
+
+<DD>
+Query edge enhancement
+<DT><I>--qzoom</I>
+
+<DD>
+Query zoom
+<DT><I>--qreticle</I>
+
+<DD>
+Query reticle
+<DT><I>--qgamma</I>
+
+<DD>
+Query Gamma
+<DT><I>--qdisplay</I>
+
+<DD>
+Query display
+<DT><I>--sf=FPS, --setframerate=FPS</I>
+
+<DD>
+Set frame rate to FPS
+<DT><I>--ss=SCSIID, --setscsiid=SCSIID</I>
+
+<DD>
+Set SCSI ID to SCSIID
+<DT><I>--sh=SPEED, --setshutter=SPEED</I>
+
+<DD>
+Set shutter speed to SPEED
+<DT><I>--sd=SIZE, --setdisplaysize=SIZE</I>
+
+<DD>
+Set display size to SIZE
+<P>
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES </H2>
+
+To retrieve the current recording record rate, displaysize, and shutter speed
+use:
+<P>
+<PRE>
+        kmc_control --qrecordrate --qsize --qshutter
+</PRE>
+
+<P>
+To set the record rate to 250 fps and the display size to 256x240, use:
+<P>
+<PRE>
+        kmc_control --setrecordrate=250 --setdisplaysize=256x240
+</PRE>
+
+<P>
+or: 
+<P>
+<PRE>
+        kmc_control --sr=250 --sd=256x240
+</PRE>
+
+<P>
+To begin recording (from any initial mode, since it will automatically
+change to the RECORD READY mode), use:
+<P>
+<PRE>
+        kmc_control -r
+</PRE>
+
+<P>
+To begin playing, use:
+<P>
+<PRE>
+        kmc_control -p
+</PRE>
+
+<P>
+To stop playing, use:
+<P>
+<PRE>
+        kmc_control -s
+</PRE>
+
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Dan Blair -&nbsp;<A HREF="mailto:blair@msd.anl.gov">blair@msd.anl.gov</A>
+<PRE>
+Dan Mueth -&nbsp;<A HREF="mailto:d-mueth@uchicago.edu">d-mueth@uchicago.edu</A>
+
+</PRE>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 16:54:32 GMT, August 23, 1999
+</BODY>
+</HTML>

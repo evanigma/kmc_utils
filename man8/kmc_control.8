@@ -1,0 +1,223 @@
+.TH KMC_READ 8 "Sept 01, 1999" "kmc_utils" "Version 0.3.2" 
+.SH NAME
+kmc_control \- control a Kodak Motion Corder using serial interface
+.SH SYNOPSIS
+.B "kmc_control" [ \fI-d DEVICE \fP ] [ \fIoptions\fP...  ]
+.SH DESCRIPTION
+kmc_control is part of the kmc_utils package for controlling and reading 
+information and images from Kodak Motion Corder(KMC) high speed 
+digital cameras.
+This version is designed to run on Linux, although future versions may 
+support other Unix variants.  
+.PP
+kmc_control is the command line interface for sending commands and receiving
+information over the RS-232C (serial) interface. It does not allow one to
+transfer images from the KMC to a computer, which is done with kmc_read. 
+.PP
+kmc_control gives the user low level access such as pressing individual 
+buttons, or the user can use higher level commands to change variables, 
+change modes, play, record, etc. with a single command from any mode of 
+the KMC.
+
+.SH OPTIONS
+.TP
+.I \-H 
+Show usage (help) information
+.TP
+.I \-v 
+Show version number
+.TP
+.I \-I 
+Begin interactive mode
+.TP
+.I \-Q 
+Full query
+.TP
+.I \-p 
+Play
+.TP
+.I \-P 
+PAL video standard
+.TP
+.I \-s 
+Stop
+.TP
+.I \-r 
+Record
+.TP
+.I \-c 
+Clear serial buffer
+.TP
+.I \-n NUMBER 
+Number of trigger pulses (this option must precede -t if used)
+.TP
+.I \-t DELAY
+Time delay between trigger pulses (in milliseconds)
+.TP
+.I \-x
+Press Trigger button until KMC enters LIVE mode. (For use with time delayed triggering in random mode, when all memory must be filled with images before the KMC will allow PC download of any images.)
+.TP
+.I \--pp, --pplay
+Press Play button
+.TP
+.I \--ps, --pstop, --pescape 
+Press Stop/Escape button
+.TP
+.I \--pu, --pup 
+Press Up button
+.TP
+.I \--pd, --pdown 
+Press Down button
+.TP
+.I \--pm, --pmode 
+Press Mode button
+.TP
+.I \--pe, --penter, --pmenu 
+Press Enter/Menu button
+.TP
+.I \--pr, --precordready
+Press Record Ready button
+.TP
+.I \--pt, --ptrigger
+Press Trigger button
+.TP
+.I \--qdate
+Query date
+.TP
+.I \--qmode
+Query mode
+.TP
+.I \--qdisplaymode
+Query if in Display Mode
+.TP
+.I \--qrecordready
+Query if Record Ready
+.TP
+.I \--qsetup
+Query if in Setup Mode
+.TP
+.I \--qdisplaystatus
+Query Display Status
+.TP
+.I \--qtrigger
+Query Trigger Mode
+.TP
+.I \--qrandom
+Query Random Trigger Mode
+.TP
+.I \--qmemory
+Query number of memory boards
+.TP
+.I \--qrecordrate
+Query record rate
+.TP
+.I \--qsize
+Query display size
+.TP
+.I \--qshutter
+Query shutter speed
+.TP
+.I \--qplayrate
+Query playback rate
+.TP
+.I \--qcount
+Query frame count
+.TP
+.I \--qtime
+Query time 
+.TP
+.I \--qedge
+Query edge enhancement
+.TP
+.I \--qzoom
+Query zoom
+.TP
+.I \--qreticle
+Query reticle
+.TP
+.I \--qgamma
+Query Gamma
+.TP
+.I \--qdisplay
+Query display
+.TP
+.I \--sr=FPS, --setrecordrate=FPS
+Set record rate to FPS
+.TP
+.I \--sp=FPS, --setplayrate=FPS
+Set play rate to FPS
+.TP
+.I \--ss=SCSIID, --setscsiid=SCSIID
+Set SCSI ID to SCSIID
+.TP
+.I \--sh=SPEED, --setshutter=SPEED
+Set shutter speed to SPEED
+.TP
+.I \--sd=SIZE, --setdisplaysize=SIZE
+Set display size to SIZE
+.TP
+.I \--st=MODE, --settrigger=MODE
+Set trigger mode to MODE
+
+
+.SH EXAMPLES 
+To retrieve the current recording record rate, displaysize, and shutter speed
+use:
+
+.nf
+	kmc_control --qrecordrate --qsize --qshutter
+.fi
+
+To set the record rate to 250 fps and the display size to 256x240, use:
+
+.nf
+	kmc_control --setrecordrate=250 --setdisplaysize=256x240
+.fi
+
+or: 
+
+.nf
+	kmc_control --sr=250 --sd=256x240
+.fi
+
+To begin recording (from any initial mode, since it will automatically
+change to the RECORD READY mode), use:
+
+.nf
+	kmc_control -r
+.fi
+
+To begin playing, use:
+
+.nf
+	kmc_control -p
+.fi
+
+To stop playing, use:
+
+.nf
+	kmc_control -s
+.fi
+
+To enter random trigger mode and trigger every 500 milliseconds for 
+a total of 1000 trigger pulses(please note that precise timing may 
+not be reliable and will depend upon system speed and load) and then
+to continue triggering until memory is filled to allow PC download 
+of images:
+
+.nf
+	kmc_control -n 1000 -t 500 -x
+.fi
+
+In places where PAL video is used, be sure to use -P before the
+other options:
+
+.nf
+	kmc_control -P --qrecordrate --qsize --qshutter
+.fi
+
+
+.SH AUTHORS
+Dan Blair -\ blair@msd.anl.gov
+.nf
+Dan Mueth -\ d-mueth@uchicago.edu

@@ -1,0 +1,225 @@
+<HTML><HEAD><TITLE>Manpage of KMC_READ</TITLE>
+</HEAD><BODY>
+<H1>KMC_READ</H1>
+Section: Version 0.3.0 (8)<BR>Updated: Aug 18, 1999<BR><A HREF="#index">Index</A>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+kmc_control - control a Kodak Motion Corder using serial interface
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>kmc_control </B><I>mode</I> [ <I>options</I>...  ] [ <I>device</I> ]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+kmc_control is part of the kmc_utils package for controlling and reading 
+information and images from Kodak Motion Corder(KMC) high speed 
+digital cameras.
+This version is designed to run on Linux, although future versions may 
+support other Unix variants.  
+<P>
+
+kmc_control is the command line interface for sending commands and receiving
+information over the RS-232C (serial) interface. It does not allow one to
+transfer images from the KMC to a computer, which is done with kmc_read. 
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><I>-H </I>
+
+<DD>
+Show usage (help) information
+<DT><I>-v </I>
+
+<DD>
+Show version number
+<DT><I>-I </I>
+
+<DD>
+Begin interactive mode
+<DT><I>-Q </I>
+
+<DD>
+Full query
+<DT><I>--pp, --pplay</I>
+
+<DD>
+Press Play Button
+<DT><I>--ps, --pstop, --pescape </I>
+
+<DD>
+Press Stop/Escape Button
+<DT><I>--pu, --pup </I>
+
+<DD>
+Press Up Button
+<DT><I>--pd, --pdown </I>
+
+<DD>
+Press Down Button
+<DT><I>--pm, --pmode </I>
+
+<DD>
+Press Mode Button
+<DT><I>--pe, --penter, --pmenu </I>
+
+<DD>
+Press Enter/Menu Button
+<DT><I>--pr, --precordready</I>
+
+<DD>
+Press Record Ready Button
+<DT><I>--pt, --ptrigger</I>
+
+<DD>
+Press Trigger Button
+<DT><I>--qdate</I>
+
+<DD>
+Query Date
+<DT><I>--qframerate</I>
+
+<DD>
+Query Frame Rate 
+<DT><I>--qmode</I>
+
+<DD>
+Query Mode
+<DT><I>--qrecordready</I>
+
+<DD>
+Query Record Ready
+<DT><I>--qsetup</I>
+
+<DD>
+Query Setup Mode
+<DT><I>--qdisplaystatus</I>
+
+<DD>
+Query Display Status
+<DT><I>--qtrigger</I>
+
+<DD>
+Query Trigger Mode
+<DT><I>--qrandom</I>
+
+<DD>
+Query Random Trigger Mode
+<DT><I>--qmemory</I>
+
+<DD>
+Query Memory
+<DT><I>--qrecordrate</I>
+
+<DD>
+Query Record Rate
+<DT><I>--qsize</I>
+
+<DD>
+Query Display Size
+<DT><I>--qshutter</I>
+
+<DD>
+Query Shutter Speed
+<DT><I>--qplayrate</I>
+
+<DD>
+Query Playback Rate
+<DT><I>--qcount</I>
+
+<DD>
+Query Frame Count
+<DT><I>--qtime</I>
+
+<DD>
+Query Time 
+<DT><I>--qedge</I>
+
+<DD>
+Query Edge Enhancement
+<DT><I>--qzoom</I>
+
+<DD>
+Query Zoom
+<DT><I>--qreticle</I>
+
+<DD>
+Query Reticle
+<DT><I>--qgamma</I>
+
+<DD>
+Query Gamma
+<DT><I>--qdisplay</I>
+
+<DD>
+Query Display
+<DT><I>--sf=FPS, --setframerate=FPS</I>
+
+<DD>
+Set Frame Rate to FPS
+<DT><I>--ss=SCSIID, --setscsiid=SCSIID</I>
+
+<DD>
+Set SCSI ID to SCSIID
+<DT><I>--sh=SPEED, --setshutter=SPEED</I>
+
+<DD>
+Set Shutter Speed to SPEED
+<DT><I>--sr=RES, --setres=RES</I>
+
+<DD>
+Set Resolution to RES
+<P>
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES </H2>
+
+To determine which mode the KMC is in, use:
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT><BR>
+<PRE>
+        kmc_control -m
+</PRE>
+
+<P>
+To retrieve the current recording frame rate, use:
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT><BR>
+<PRE>
+        kmc_control --qframerate
+</PRE>
+
+<P>
+To press the RECORD READY button, use:
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT><BR>
+<PRE>
+        kmc_control --pr
+</PRE>
+
+<P>
+To use kmc_control in interactive mode, use:
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT><BR>
+<PRE>
+        kmc_control -I
+</PRE>
+
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Dan Blair -&nbsp;<A HREF="mailto:blair@msd.anl.gov">blair@msd.anl.gov</A>
+<PRE>
+Dan Mueth -&nbsp;<A HREF="mailto:d-mueth@uchicago.edu">d-mueth@uchicago.edu</A>
+
+</PRE>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 03:13:53 GMT, August 20, 1999
+</BODY>
+</HTML>

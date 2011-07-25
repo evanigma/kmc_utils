@@ -1,0 +1,39 @@
+/* XPM */
+static char *junk2[] = {
+/* width height num_colors chars_per_pixel */
+"    29    28        4            1",
+/* colors */
+". c #000000",
+"# c #a4a4a4",
+"a c #eaeaea",
+"b c #ffffff",
+/* pixels */
+"bbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaa.aaaa..aaaaaaaaaaa",
+"aaaaaaaaaaa..aa....aaaaaaaaaa",
+"aaaaaaaaaaaa..a...aaaaaaaaaaa",
+"aaaaaaaaaaaa.....aaaaaaaaaaaa",
+"aaaaaaaaaaaaa...aaaaaaaaaaaaa",
+"aaaaaaaaaaaaa....aaaaaaaaaaaa",
+"aaaaaaaaaaaa......aaaaaaaaaaa",
+"aaaaaaaaaaaa..a....aaaaaaaaaa",
+"aaaaaaaaaaa..aaa....aaaaaaaaa",
+"aaaaaaaaaaa.aaaaa..aaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+"#############################"
+};

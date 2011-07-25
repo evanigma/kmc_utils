@@ -1,0 +1,6 @@
+man2html:
+	1) man2html kmc_read.8 > junk.html
+	2) edit
+		- remove top line
+		- remove "Return to Main Contents" line
+	

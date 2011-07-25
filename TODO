@@ -1,0 +1,6 @@
+Add support for tiffs.
+Use a flag for bit ordering for other Unixes(in Makefile).
+Check unusual cases like grabbing 0 frames or 1 frame in multiple
+	grab situations.
+Write GTK GUI's
+

@@ -1,0 +1,143 @@
+kmc_utils -- utilities for interfacing a Kodak Motion Corder Analyzer(KMC) fast
+	     digital camera
+
+Copyright (C) 1998  Daniel M. Mueth
+
+Last updated: Fri Aug 23, 1999
+
+Overview
+--------
+This is version 0.3.2 of kmc_utils.  This package consists of several 
+utilities for use of Kodak Motion Corder Analyzers (KMC's) (both color 
+and monochrome) under Linux. The KMC's have a SCSI-2 interface for 
+transfering images and a serial interface for remote control of the KMC.  
+The eventual goal of kmc_utils will be to have both command line and 
+GUI(Perl/GTK, Gnome-aware) interfaces for both SCSI and serial 
+communcations with KMC's.  
+
+kmc_utils is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2, or (at your option) any
+later version.
+
+kmc_utils is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the file
+LICENSE for more details.
+
+
+Availability
+------------
+kmc_utils has a web page at 
+	http://rainbow.uchicago.edu/~muet/linux/kmc/kmc_utils.html  
+This is also where the latest release of kmc_utils can be found.
+
+Notes About this Release
+------------------------
+This software is still under development.  The programs kmc_read and 
+kmc_control should be usable.  Any other utilities may not be at all
+usable.
+
+Before You Begin
+----------------
+kmc_read, the program used to read frames from Kodak Motion Corder Analyzers,  
+require generic SCSI support.  Your kernel should be compiled with support 
+for your particular SCSI driver as well as generic SCSI support.  If you 
+are using `make config', this is done as follows:
+       *
+       * SCSI support
+       *
+       SCSI support? (CONFIG_SCSI) [n] y
+       *
+       * SCSI support type (disk, tape, CDrom)
+       *
+        ...
+       Scsi generic support (CONFIG_CHR_DEV_SG) [n] y
+       *
+       * SCSI low-level drivers
+       *
+kmc_read and kmc_view use the generic SCSI support in the kernel.  Thus, 
+the kernel version may effect these applications. For recent kernels 
+( >1.3.98 ), one should not encounter any problems.
+
+
+Installation
+------------
+Typical users should:
+	1) (If you have a recent KMC, you may need to uncomment the line
+		EXTRA=-DREVERSED_RECORD_RATES=1
+		line in the Makefile.) 
+	2) make 
+	3) make install
+	4) You may need to use chmod to give rw permission for /dev/sg? to non-root users.  eg:		chmod go+rw /dev/sga
+    5) If you have a recent Gtk+, you may do: make kmc_play
+
+
+Notes about Time Lapse Triggering and Random Triggering
+-------------------------------------------------------
+A KMC can be set to RANDOM mode and remotely triggered with an 
+external TTL signal or a software trigger using the serial connection.
+The program kmc_control has options allowing one to send a software
+trigger every T milliseconds for N times. It should be noted that the 
+KMC's cannot be reliably triggered within an interval less than 100ms.
+It should also be noted that to transfer images from a KMC to a PC
+which were acquired in RANDOM mode, the entire memory must be filled
+with frames.  For this reason, kmc_control will grab extra frames at
+the end of a Time Lapse Triggering run until the memory is full and
+the KMC returns to LIVE mode.
+
+
+Note about Record Rates
+-----------------------
+Older KMC BIOS's had a bug which reversed the 30fps and 125fps values.
+If you have an older BIOS, you will need to uncomment the appropriate
+line in the Makefile.
+
+
+Note about transfering images from a KMC
+----------------------------------------
+A KMC must be in "Live" mode to properly transfer images on the SCSI 
+bus.  Transfers done in "Playback" mode tend to be unreliable. 
+
+
+Note about adding and removing devices "on-the-fly".
+---------------------------------------------------
+Under some circumstances, it may be convenient to add or remove a KMC
+from a SCSI chain without rebooting(ie. if you have to "share"
+your KMC).  If a KMC was added to the SCSI chain after the machine was 
+booted, it can be added using:
+
+	echo "scsi add-single-device 0 0 5 0" > /proc/scsi/scsi
+(where 0 0 5 0 should be replaced with the HOST ID, CHANEL, SCSI ID, LUN).
+
+To see which devices are identified (and their HOST ID, CHANEL, SCSI ID, LUN):
+
+	cat /proc/scsi/scsi
+
+Devices can be removed similarly to how they were added:
+	echo "scsi remove-single-device 0 0 5 0" > /proc/scsi/scsi
+
+For more information, see the SCSI-Programming-HOWTO.
+
+WARNING:  	This should not be done on a scsi chain with a filesystem which
+			is being accessed.
+
+
+Warning/Disclaimer
+------------------
+Bad SCSI programming could hang the SCSI bus, which would be particularly 
+bad if you have SCSI hard drives mounted on the same SCSI bus as the KMC.  
+These utilities are provided with no explicit or implicit warranties.  Use 
+at your own risk.
+
+--
+Please feel free to contact me directly if you have any problems or questions
+about kmc_utils.  I would also be interested to know how well this software
+works for different configurations and what types of applications people are
+using it for.
+--
+Daniel M. Mueth
+d-mueth@uchicago.edu
+James Franck Institute
+University of Chicago
+
